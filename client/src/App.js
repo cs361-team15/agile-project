@@ -1,23 +1,57 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-import './App.css'
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom"
+
+import {Button, Input} from './components/FormComponents'
+import LogIn from './pages/Login'
+import { useState } from 'react'
 
 function TopNav() {
+  const navLinks = css`
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  `
 
+  const navLink = css`
+    padding: 8px;
+    display: inline;
+  `
+
+  const [query, setQuery] = useState("")
   return (
-    <div className="Top-Nav row debug">
-      <div className="column-50">
+    <div css={css`
+      display: flex;
+    `}>
+      <div css={css`
+        flex: 50%;
+      `}>
         <h2>LOGO</h2>
       </div>
-      <div className="column-25">
-        <h2>SEARCH BAR</h2>
+      <div css={css`
+        flex: 25%;
+      `}>
+        <form onSubmit={(e) => {
+          e.preventDefault()
+          // Make 
+        }}>
+          <Input
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search"
+          />
+          <Button type="submit">Enter</Button>
+        </form>
       </div>
-      <div className="column-25">
-        <ul className="nav-links">
-          <li className="inline nav-link"><Link to="/login">Log In</Link></li>
-          <li className="inline nav-link"><Link>Portfolios</Link></li>
-          <li className="inline nav-link"><Link>News</Link></li>
-          <li className="inline nav-link"><Link>Account</Link></li>
+      <div css={css`
+        flex: 25%;
+
+      `}>
+        <ul css={navLinks}>
+          <li css={navLink}><NavLink to="/login">Log In</NavLink></li>
+          <li css={navLink}><NavLink to="/portfolios">Portfolios</NavLink></li>
+          <li css={navLink}><NavLink to="/news">News</NavLink></li>
+          <li css={navLink}><NavLink to="/account">Account</NavLink></li>
         </ul>
       </div>
     </div>
@@ -27,11 +61,11 @@ function TopNav() {
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div>
         <TopNav />
         <Switch>
           <Route path="/login">
-            <p>placeholder login</p>
+            <LogIn />
           </Route>
           <Route exact path="/">
             <p>placeholder index</p>
