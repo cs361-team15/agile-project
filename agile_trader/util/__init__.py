@@ -1,2 +1,1 @@
-from .remote_message_handler import RemoteMessageHandler
 from .payload_parser import PayloadParser

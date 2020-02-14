@@ -1,7 +1,8 @@
 from ..models import *
 from ..util import *
+from .remote_message_service import RemoteMessageService
 
-handler = RemoteMessageHandler()
+handler = RemoteMessageService()
 parser = PayloadParser()
 holding = Holding()
 
