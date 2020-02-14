@@ -5,12 +5,13 @@ from datetime import date, datetime, timedelta
 
 class DBminion:
 
-    def __init__(self, u, p, h, db):
+    def __init__(self, u, pw, h, prt, db):
 
         self.DBconfig = {
             'user': u,
-            'password': p,
+            'password': pw,
             'host': h,
+            'port': prt,
             'database': db
         }
 
@@ -493,4 +494,9 @@ class DBminion:
 
         return self._DB_R(watch_query, None)
 
-# minion = DBminion('derringa', 'america', '10.0.0.183', 'stock_app')
+minion = DBminion('group_fifteen', 'oregonstate', 'stocks-db.cyuqmchnvglv.us-east-2.rds.amazonaws.com', '3306', 'stock-app')
+
+# minion.insertUser('andy@gmail.com', 'germany', 'Andy', 'Derringer')
+
+for user in minion.selectAllUsers():
+    print(user)
