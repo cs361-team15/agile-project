@@ -34,7 +34,8 @@ export default function LogIn() {
         />
         <Button type="submit">Enter</Button>
       </form>
-      <NavLink to="/login">Forgot your password?</NavLink>
+      <NavLink to="/login" css={css`text-decoration: none; color: #2b7bbe;`}>Forgot your password?</NavLink>
+      <NavLink to="/signup" css={css`text-decoration: none; color: #2b7bbe;`}>Sign Up</NavLink>
     </div>
   )
 }
