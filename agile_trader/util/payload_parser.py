@@ -1,31 +1,9 @@
-import requests
-import json
 import datetime
 
-class RemoteMessageParser:
+class PayloadParser:
     def __init__(self):
         pass
 
-    def get_stock_long_history(self, symbol):
-        # key = dao.getKey('AV')
-        key = 'VUUT2T6MX6AKP991'
-        long_history_endpoint = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&outputsize=full&symbol=' + symbol + '&apikey=' + key
-        result = requests.get(long_history_endpoint)
-        response = result.json()
-        # dao.incrementKeyUsage('AV')
-        self.parse(response['Time Series (Daily)'])
-        # print(response)
-
-    def get_stock_batch(self, symbols):
-        # key = dao.getKey('WTD')
-        key = 'uo9zAw0g4QeNtJKrmXzMLvlKkvpl03CPYZup39xsZTUisN7qzLjTyQzjEraV'
-        batch_endpoint = 'https://api.worldtradingdata.com/api/v1/stock?symbol=' + ','.join(symbols) + '&api_token=' + key
-        result = requests.get(batch_endpoint)
-        response = result.json()
-        # dao.incrementKeyUsage('WTD')
-        self.parse(response['data'], 'WTD')
-        print(response)
-    
     def parse(self, payload, service='AV'):
         if service == 'AV':
             result = 0
@@ -46,12 +24,11 @@ class RemoteMessageParser:
                 i += 1
                 year, month, day = cur.split('-')
                 cur = datetime.date(year, month, day)
-                
-            
+                       
             return print(payload[list(payload)[0]])
         else:
             result = []
-            for stock in payload:
+            for stock in payload['data']:
                 result.append({
                     'symbol': stock['symbol'],
                     'name': stock['name'],
@@ -64,22 +41,3 @@ class RemoteMessageParser:
                     'fifty_two_week_low': stock['52_week_low']
                 })
             return result
-
-
-
-test = RemoteMessageParser()
-
-symbol1 = 'TM'
-symbol2 = 'MSFT'
-symbol3 = 'AAPL'
-symbol4 = 'GOOGL'
-symbol5 = 'ATVI'
-symbol6 = 'SBUX'
-symbol7 = 'GE'
-symbol8 = 'F'
-symbol9 = 'PG'
-symbol10 = 'DIS'
-
-symbols = [symbol1, symbol2, symbol3, symbol4, symbol5]
-
-test.get_stock_long_history(symbol1)
