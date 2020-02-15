@@ -1,8 +1,8 @@
-# project/app.py
-import DBminion
+# agile_trader/app.py
 from flask import Flask
-from .services.application_service import ApplicationService
+from .services import ApplicationService
 app = Flask(__name__)
+
 minion = DBminion('derringa', 'america', '10.0.0.183', 'stock_app')
 
 appService = ApplicationService()

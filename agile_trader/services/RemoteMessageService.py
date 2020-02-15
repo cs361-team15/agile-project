@@ -5,7 +5,7 @@ class RemoteMessageService:
     def __init__(self):
         pass
 
-    def get_stock_long_history(self, symbol):
+    def getStockLongHistory(self, symbol):
         # key = dao.getKey('AV')
         key = 'VUUT2T6MX6AKP991'
         long_history_endpoint = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&outputsize=full&symbol=' + symbol + '&apikey=' + key
@@ -14,7 +14,7 @@ class RemoteMessageService:
         # dao.incrementKeyUsage('AV')
         # print(response)
 
-    def get_stock_batch(self, symbols):
+    def getStockBatch(self, symbols):
         # key = dao.getKey('WTD')
         key = 'uo9zAw0g4QeNtJKrmXzMLvlKkvpl03CPYZup39xsZTUisN7qzLjTyQzjEraV'
         batch_endpoint = 'https://api.worldtradingdata.com/api/v1/stock?symbol=' + ','.join(symbols) + '&api_token=' + key

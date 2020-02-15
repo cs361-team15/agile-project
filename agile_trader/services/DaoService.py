@@ -3,7 +3,7 @@ from mysql.connector import errorcode
 from datetime import date, datetime, timedelta
 
 
-class DBminion:
+class DaoService:
 
     def __init__(self, u, pw, h, prt, db):
 
@@ -494,9 +494,9 @@ class DBminion:
 
         return self._DB_R(watch_query, None)
 
-minion = DBminion('group_fifteen', 'oregonstate', 'stocks-db.cyuqmchnvglv.us-east-2.rds.amazonaws.com', '3306', 'stock-app')
+# minion = DBminion('group_fifteen', 'oregonstate', 'stocks-db.cyuqmchnvglv.us-east-2.rds.amazonaws.com', '3306', 'stock-app')
 
 # minion.insertUser('andy@gmail.com', 'germany', 'Andy', 'Derringer')
 
-for user in minion.selectAllUsers():
-    print(user)
+# for user in minion.selectAllUsers():
+#     print(user)

@@ -1,6 +1,6 @@
 from ..models import *
 from ..util import *
-from .remote_message_service import RemoteMessageService
+from .RemoteMessageService import RemoteMessageService
 
 handler = RemoteMessageService()
 parser = PayloadParser()
@@ -10,10 +10,10 @@ class ApplicationService:
     def __init__(self):
         pass
 
-    def holding_test(self):
+    def holdingTest(self):
         return "Testing ApplicationService - returning a Holding object: " + holding.test()
 
-    def handler_test(self):
-        response = handler.get_stock_batch(['TM'])
+    def handlerTest(self):
+        response = handler.getStockBatch(['TM'])
         result = parser.parse(response, 'WTD') 
         return "Testing ApplicationService - returning a handler result:  " + result[0]['symbol']
