@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom'
 export default function LogIn() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [passwordConfirm, setPasswordConfirm] = useState("")
 
   return (
     <div css={css`
@@ -16,7 +17,7 @@ export default function LogIn() {
       justify-content: center;
       flex-direction: column;
     `}>
-      <h2>Log In</h2>
+      <h2>Sign Up</h2>
       <form onSubmit={(e) => {
         e.preventDefault()
         // Make 
@@ -32,10 +33,15 @@ export default function LogIn() {
           onChange={e => setPassword(e.target.value)}
           placeholder="Password"
         />
+        <Input
+          type="password"
+          value={passwordConfirm}
+          onChange={e => setPasswordConfirm(e.target.value)}
+          placeholder="Confirm Password"
+        />
         <Button type="submit">Enter</Button>
       </form>
-      <NavLink to="/login" css={css`text-decoration: none; color: #2b7bbe;`}>Forgot your password?</NavLink>
-      <NavLink to="/signup" css={css`text-decoration: none; color: #2b7bbe;`}>Sign Up</NavLink>
+      <NavLink to="/login" css={css`text-decoration: none; color: #2b7bbe;`}>Log In</NavLink>
     </div>
   )
 }

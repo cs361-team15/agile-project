@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-do
 
 import {Button, Input} from './components/FormComponents'
 import LogIn from './pages/Login'
+import Landing from './pages/Landing'
+import SignUp from './pages/SignUp'
 import { useState } from 'react'
 
 function TopNav() {
@@ -26,7 +28,7 @@ function TopNav() {
       <div css={css`
         flex: 50%;
       `}>
-        <h2>LOGO</h2>
+        <NavLink to="/" css={css`text-decoration: none; color: black;`}><h2>Agile Trader</h2></NavLink>
       </div>
       <div css={css`
         flex: 25%;
@@ -38,7 +40,7 @@ function TopNav() {
           <Input
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder="Search"
+            placeholder="Stock Search"
           />
           <Button type="submit">Enter</Button>
         </form>
@@ -48,10 +50,10 @@ function TopNav() {
 
       `}>
         <ul css={navLinks}>
-          <li css={navLink}><NavLink to="/login">Log In</NavLink></li>
-          <li css={navLink}><NavLink to="/portfolios">Portfolios</NavLink></li>
-          <li css={navLink}><NavLink to="/news">News</NavLink></li>
-          <li css={navLink}><NavLink to="/account">Account</NavLink></li>
+          <li css={navLink}><NavLink to="/login" css={css`text-decoration: none; color: #2b7bbe;`}>Log In</NavLink></li>
+          <li css={navLink}><NavLink to="/portfolios" css={css`text-decoration: none; color: #2b7bbe;`}>Portfolios</NavLink></li>
+          <li css={navLink}><NavLink to="/news" css={css`text-decoration: none; color: #2b7bbe;`}>News</NavLink></li>
+          <li css={navLink}><NavLink to="/account" css={css`text-decoration: none; color: #2b7bbe;`}>Account</NavLink></li>
         </ul>
       </div>
     </div>
@@ -67,8 +69,11 @@ function App() {
           <Route path="/login">
             <LogIn />
           </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
           <Route exact path="/">
-            <p>placeholder index</p>
+            <Landing />
           </Route>
         </Switch>
       </div>
