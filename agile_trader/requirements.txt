@@ -4,3 +4,12 @@ itsdangerous==1.1.0
 Jinja2==2.10.3
 MarkupSafe==1.1.1
 Werkzeug==0.16.0
+requests==2.22.0
+certifi==2019.11.28
+chardet==3.0.4
+idna==2.8
+mysql==0.0.2
+mysql-connector==2.2.9
+mysqlclient==1.4.6
+urllib3==1.25.8
+six==1.14.0

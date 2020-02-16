@@ -1,10 +1,14 @@
 from ..models import *
 from ..util import *
 from .RemoteMessageService import RemoteMessageService
+from .DaoService import DaoService
+from .CacheService import CacheService
 
+# dao = DaoService()
+cache = CacheService()
 handler = RemoteMessageService()
 parser = PayloadParser()
-holding = Holding()
+holding = Holding({})
 
 class ApplicationService:
     def __init__(self):

@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql
 from mysql.connector import errorcode
 from datetime import date, datetime, timedelta
 
