@@ -1,6 +1,7 @@
 # project/app.py
 import DBminion
 from flask import Flask
+from flask_jwt import JWT, jwt_required, current_identity
 from .services.application_service import ApplicationService
 app = Flask(__name__)
 minion = DBminion('derringa', 'america', '10.0.0.183', 'stock_app')
@@ -14,6 +15,52 @@ def foobar():
 @app.route('/test')
 def handler_test():
     return "This is a new test"
+
+############            ############
+############ Auth   API ############
+############            ############
+
+def authenticate(email, password):
+    user = minion.selectUser(email)
+    if user['email'] == email and user['password'] == password:
+      return user
+
+def identity(userPayload):
+    user_id = userPayload['user_id']
+    return user_id
+
+jwt = JWT(app, authenticate, identity)
+
+#Send a post request with {'username': , 'password': }
+#Returns an 'access_token'
+@app.route('/protected')
+@jwt_required()
+def protected():
+    return '%s' % current_identity
+
+
+############            ############
+############ Actual API ############
+############            ############
+
+@app.route('/user', methods=['POST','GET','PUT'])
+def user():
+  if request.method == 'POST':
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    email = request.form['email']
+    password = request.form['password']
+    minion.insertUser(email, password, first_name, last_name)
+  elif request.method == 'GET':
+    email = request.args.get('email')
+    user = minion.selectUser(email)
+    return user
+  elif request.method == 'PUT':
+    #need to decide how to update users.  No Database function for it yet
+    return
+
+
+
 
 ############		  ############
 ############ USER API ############
