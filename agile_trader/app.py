@@ -1,14 +1,19 @@
+
 # project/app.py
 import DBminion
 from flask import Flask
 from flask_jwt import JWT, jwt_required, current_identity
 from .services.application_service import ApplicationService
+
 app = Flask(__name__)
-minion = DBminion('derringa', 'america', '10.0.0.183', 'stock_app')
+
+# minion = DBminion('derringa', 'america', '10.0.0.183', 'stock_app')
 
 appService = ApplicationService()
 
+# test route
 @app.route('/')
+
 def foobar():
     return appService.handler_test()
 
