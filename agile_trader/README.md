@@ -22,7 +22,9 @@ Once you have your virtualenv, install requirements:
 pip install -r requirements.txt
 ```
 
-## Running the App (from the root directory `agile_trader`)
+## Running the App
+
+from the root directory `agile_trader`:
 
 ### On Linux:
 
@@ -37,7 +39,9 @@ set FLASK_APP=app.py
 flask run
 ```
 
-## Running the tests (also from the root directory `agile_trader`)
+## Running the tests
+
+also from the root directory `agile_trader`:
 
 ### On Linux and Windows
 ```
