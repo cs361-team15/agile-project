@@ -1,14 +1,20 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import {Button, Input} from '../components/FormComponents'
-import { NavLink } from 'react-router-dom'
+import { setUserEmail, setUserPass } from '../redux/actions'
+import { getAuth } from '../redux/selectors'
 
 export default function LogIn() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  const dispatch = useDispatch()
+
+  const auth = useSelector(getAuth)
   return (
     <div css={css`
       display: flex;
@@ -19,7 +25,9 @@ export default function LogIn() {
       <h2>Log In</h2>
       <form onSubmit={(e) => {
         e.preventDefault()
-        // Make 
+        
+        dispatch(setUserEmail(email))
+        dispatch(setUserPass(password))
       }}>
         <Input
           value={email}
