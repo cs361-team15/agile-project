@@ -1,5 +1,6 @@
 import unittest
-from CacheService import CacheService
+from services.CacheService import CacheService
+from services.ApplicationService import ApplicationService
 
 class TestCacheService(unittest.TestCase): 
     @classmethod
@@ -25,7 +26,7 @@ class TestCacheService(unittest.TestCase):
             'day_high': day_high, 
             'day_low': day_low, 
             'fifty_two_week_high': fifty_two_week_high, 
-            'fifty_two_week_low': fifty_two_week_high
+            'fifty_two_week_low': fifty_two_week_low
         }
         self.cacheService.add(dummy_data)
         self.assertEqual(len(self.cacheService.cache), 1)

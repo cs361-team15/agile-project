@@ -1,8 +1,7 @@
-
 # project/app.py
 from flask import Flask
 from flask_jwt import JWT, jwt_required, current_identity
-from .services import ApplicationService, DaoService, CacheService
+from agile_trader.services.ApplicationService import ApplicationService
 
 app = Flask(__name__)
 

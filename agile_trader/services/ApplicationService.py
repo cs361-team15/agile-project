@@ -1,10 +1,7 @@
-from ..models import *
-from ..util import *
+from util.PayloadParser import PayloadParser
 from .RemoteMessageService import RemoteMessageService
 from .DaoService import DaoService
 from .CacheService import CacheService
-
-holding = Holding({})
 
 class ApplicationService:
     def __init__(self):
