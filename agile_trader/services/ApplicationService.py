@@ -14,8 +14,8 @@ class ApplicationService:
         return "Testing ApplicationService - returning a Holding object: " + holding.test()
 
     def handlerTest(self):
-        response = handler.getStockBatch(['TM'])
-        result = parser.parse(response, 'WTD') 
+        response = self.handler.getStockBatch(['TM'])
+        result = self.parser.parse(response, 'WTD') 
         return "Testing ApplicationService - returning a handler result:  " + result[0]['symbol']
 
     def getStockHistory(self):

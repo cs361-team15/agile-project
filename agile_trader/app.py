@@ -13,7 +13,7 @@ appService = ApplicationService()
 @app.route('/')
 
 def foobar():
-    return appService.handler_test()
+    return appService.handlerTest()
 
 @app.route('/test')
 def handler_test():
