@@ -26,7 +26,7 @@ def handler_test():
 def authenticate(email, password):
     user = minion.selectUser(email)
     if user['email'] == email and user['password'] == password:
-      return user
+        return user
 
 def identity(userPayload):
     user_id = userPayload['user_id']
@@ -48,30 +48,30 @@ def protected():
 
 @app.route('/user', methods=['POST','GET','PUT'])
 def user():
-  if request.method == 'POST' and request.json:
-    first_name = request.json['first_name']
-    last_name = request.json['last_name']
-    email = request.json['email']
-    password = request.json['password']
-    minion.insertUser(email, password, first_name, last_name)
-  elif request.method == 'GET':
-    email = request.args.get('email')
-    user = minion.selectUser(email)
-    return jsonify(user)
-  elif request.method == 'PUT' and request.json:
-    first_name = request.json['first_name']
-    last_name = request.json['last_name']
-    email = request.json['email']
-    password = request.json['password']
-    #needs user update DAO
-    return
+    if request.method == 'POST' and request.json:
+        first_name = request.json['first_name']
+        last_name = request.json['last_name']
+        email = request.json['email']
+        password = request.json['password']
+        minion.insertUser(email, password, first_name, last_name)
+    elif request.method == 'GET':
+        email = request.args.get('email')
+        user = minion.selectUser(email)
+        return jsonify(user)
+    elif request.method == 'PUT' and request.json:
+        first_name = request.json['first_name']
+        last_name = request.json['last_name']
+        email = request.json['email']
+        password = request.json['password']
+        #needs user update DAO
+        return
 
 @app.route('/portfolios', methods=['POST','GET','PUT','DELETE'])
 @jwt_required()
 def portfolios():
-  if request.method == 'GET':
-    portfolios = minion.selectAllPortfolios()
-    return jsonify(portfolios)
+    if request.method == 'GET':
+        portfolios = minion.selectAllPortfolios()
+        return jsonify(portfolios)
 
 
 # ############		  ############
