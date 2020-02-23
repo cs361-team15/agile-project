@@ -1,7 +1,7 @@
 # project/app.py
 from flask import Flask, jsonify
 from flask_jwt import JWT, jwt_required, current_identity
-from agile_trader.services.ApplicationService import ApplicationService
+from services.ApplicationService import ApplicationService
 
 app = Flask(__name__)
 
