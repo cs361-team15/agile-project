@@ -58,10 +58,10 @@ python -m tests.test_TESTSUITENAME
 
 ### On Windows
 
-1.) Make sure you have the [Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-python#set-up) installed
-2.) Login to Heroku through the command line: `heroku login`
-3.) From the back-end's root folder (\agile_trader), convert your local directory into a git module: `git init`
-4.) Connect it to the Heroku repo: `git remote add heroku https://git.heroku.com/agile-trader.git`
+1) Make sure you have the [Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-python#set-up) installed
+2) Login to Heroku through the command line: `heroku login`
+3) From the back-end's root folder (\agile_trader), convert your local directory into a git module: `git init`
+4) Connect it to the Heroku repo: `git remote add heroku https://git.heroku.com/agile-trader.git`
 *note: if successful, you should be able to type `git remote -v` and see that URL listed for fetching and pushing*
 
 Now whenver you make a change that you want to push to the Heroku repo, you can just use the following commands:
