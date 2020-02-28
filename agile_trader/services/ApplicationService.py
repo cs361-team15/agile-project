@@ -4,8 +4,8 @@ from .DaoService import DaoService
 from .CacheService import CacheService
 
 class ApplicationService:
-    def __init__(self):
-        #self.dao = DaoService('derringa', 'america', '10.0.0.183', 'stock_app')
+    def __init__(self, dao):
+        self.dao = dao
         self.cache = CacheService()
         self.handler = RemoteMessageService()
         self.parser = PayloadParser()
@@ -14,7 +14,7 @@ class ApplicationService:
         return "Testing ApplicationService - returning a Holding object: " + holding.test()
 
     def handlerTest(self):
-        response = self.handler.getStockBatch(['TM'])
+        response = self.handler.getStockBatch(['ATVI'])
         result = self.parser.parse(response, 'WTD') 
         return "Testing ApplicationService - returning a handler result:  " + result[0]['symbol']
 

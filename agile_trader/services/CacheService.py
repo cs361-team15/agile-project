@@ -92,6 +92,7 @@ if __name__ == '__main__':
         'fifty_two_week_low': '47.58'
     })    
 
+
     print(cs.find('TM'))
 
     cs.add({'symbol': 'F', 
