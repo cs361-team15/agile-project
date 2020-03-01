@@ -41,17 +41,17 @@ def foobar():
 ############ Actual API ############
 ############            ############
 
-@app.route('/authenticate')
+@app.route('/authenticate', methods=['POST'])
 def authenticate():
-    email = request.json['email']
-    password = request.json['password']
-    user = minion.selectUser(email)
-    if user['email'] == email and user['password'] == password:
-      resp = {'message':'Email and Password OK'}
-      return jsonify(resp)
-    else:
-      resp = {'error': 'Email and password do not match'}
-      return make_response(jsonify(resp), 401)
+  email = request.json['email']
+  password = request.json['password']
+  user = minion.selectUser(email)
+  if user['email'] == email and user['password'] == password:
+    resp = {'message':'Email and Password OK'}
+    return jsonify(resp)
+  else:
+    resp = {'error': 'Email and password do not match'}
+    return make_response(jsonify(resp), 401)
 
 
 
