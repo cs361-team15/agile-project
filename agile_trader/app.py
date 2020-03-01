@@ -46,9 +46,9 @@ def authentication():
   email = request.json['email']
   password = request.json['password']
   user = minion.selectUser(email)
-  if user['email'] == email and user['password'] == password:
+  userDict = user[0]
+  if userDict.get('email') == email and userDict.get('password') == password:
     return "Email and Password Ok"
-
 
 
 @app.route('/user', methods=['POST','GET','PUT'])
