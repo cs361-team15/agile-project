@@ -94,10 +94,10 @@ def portfolios():
 '''
 @app.route('/insertUser', methods=['POST','GET'])
 def insertUser():
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    email = request.form['email']
-    password = request.form['password']
+    first_name = request.json['first_name']
+    last_name = request.json['last_name']
+    email = request.json['email']
+    password = request.json['password']
     minion.insertUser(email, password, first_name, last_name)
     #Should return a way to note it was successful/unsuccesful?
 
@@ -111,8 +111,8 @@ def insertUser():
 '''
 @app.route('/removeUser', methods=['POST','GET'])
 def removeUser():
-    email = request.form['email']
-    password = request.form['password']
+    email = request.json['email']
+    password = request.json['password']
     minion.removeUser(email, password)
 
 '''
@@ -123,7 +123,7 @@ def removeUser():
 '''
 @app.route('/selectUser', methods=['POST','GET'])
 def selectUser():
-    email = request.form['email']
+    email = request.json['email']
     user = minion.selectUser(email)
     return user
 
@@ -152,8 +152,8 @@ def selectAllUsers():
 '''
 @app.route('/insertPortfolio', methods=['POST','GET'])
 def insertPortfolio():
-    email = request.form['email']
-    portfolio = request.form['portfolio']
+    email = request.json['email']
+    portfolio = request.json['portfolio']
     minion.insertPortfolio(portfolio, email)
 
 '''
@@ -165,8 +165,8 @@ def insertPortfolio():
 '''
 @app.route('/removePortfolio', methods=['POST','GET'])
 def removePortfolio():
-    email = request.form['email']
-    portfolio = request.form['portfolio']
+    email = request.json['email']
+    portfolio = request.json['portfolio']
     minion.removePortfolio(portfolio, email)
 
 '''
@@ -179,9 +179,9 @@ def removePortfolio():
 '''
 @app.route('/addPortfolioBalance', methods=['POST','GET'])
 def addPortfolioBalance():
-    transfer = request.form['transfer']
-    email = request.form['email']
-    portfolio = request.form['portfolio']
+    transfer = request.json['transfer']
+    email = request.json['email']
+    portfolio = request.json['portfolio']
     minion.addPortfolioBalance(transfer, email, portfolio) #In the DB_CUD_ there was two trasnfer args?
 
 '''
@@ -193,8 +193,8 @@ def addPortfolioBalance():
 '''
 @app.route('/selectPortfolio', methods=['POST','GET'])
 def selectPortfolio():
-    email = request.form['email']
-    portfolio = request.form['portfolio']
+    email = request.json['email']
+    portfolio = request.json['portfolio']
     onePortfolio = minion.selectPortfolio(portfolio, email)
     return onePortfolio
 
@@ -206,7 +206,7 @@ def selectPortfolio():
 '''
 @app.route('/selectAllUserPortfolios', methods=['POST','GET'])
 def selectAllUserPortfolios():
-    email = request.form['email']
+    email = request.json['email']
     portfolios = minion.selectAllUserPortfolios(email)
     return portfolio
 
@@ -240,14 +240,14 @@ def selectAllPortfolios():
 '''
 @app.route('/insertUpdateStock', methods=['POST','GET'])
 def insertUpdateStock():
-    ticker = request.form['ticker']
-    name = request.form['name']
-    open_price = request.form['open_price']
-    current_price = request.form['current_price']
-    current_volume = request.form['current_volume']
-    market_cap = request.form['market_cap']
-    fifty_two_week_high = request.form['fifty_two_week_high']
-    fifty_two_week_low = request.form['fifty_two_week_low']
+    ticker = request.json['ticker']
+    name = request.json['name']
+    open_price = request.json['open_price']
+    current_price = request.json['current_price']
+    current_volume = request.json['current_volume']
+    market_cap = request.json['market_cap']
+    fifty_two_week_high = request.json['fifty_two_week_high']
+    fifty_two_week_low = request.json['fifty_two_week_low']
     minion.insertUpdateStock(ticker, name, open_price, current_price, current_volume, market_cap, fifty_two_week_high, fifty_two_week_low)
 
 '''
@@ -258,7 +258,7 @@ def insertUpdateStock():
 '''
 @app.route('/removeStock', methods=['POST','GET'])
 def removeStock():
-    ticker = request.form['ticker']
+    ticker = request.json['ticker']
     minion.removeStock(ticker)
 
 '''
@@ -269,7 +269,7 @@ def removeStock():
 '''
 @app.route('/selectStock', methods=['POST','GET'])
 def selectStock():
-    ticker = request.form['ticker']
+    ticker = request.json['ticker']
     stock = minion.selectStock(ticker)
     return stock
 
@@ -295,10 +295,10 @@ def selectAllStocks():
 '''
 @app.route('/purchaseStock', methods=['POST','GET'])
 def purchaseStock():
-    shares = request.form['shares']
-    ticker = request.form['ticker']
-    email = request.form['email']
-    portfolio = request.form['portfolio']
+    shares = request.json['shares']
+    ticker = request.json['ticker']
+    email = request.json['email']
+    portfolio = request.json['portfolio']
     minion.purchaseStock(shares, ticker, email, portfolio)
 
 '''
@@ -312,10 +312,10 @@ def purchaseStock():
 '''
 @app.route('/sellStock', methods=['POST','GET'])
 def sellStock():
-    shares = request.form['shares']
-    ticker = request.form['ticker']
-    email = request.form['email']
-    portfolio = request.form['portfolio']
+    shares = request.json['shares']
+    ticker = request.json['ticker']
+    email = request.json['email']
+    portfolio = request.json['portfolio']
     minion.sellStock(shares, ticker, email, portfolio)
 
 '''
@@ -327,8 +327,8 @@ def sellStock():
 '''
 @app.route('/selectPortfolioStocks', methods=['POST','GET'])
 def selectPortfolioStocks():
-    email = request.form['email']
-    portfolio = request.form['portfolio']
+    email = request.json['email']
+    portfolio = request.json['portfolio']
     stocks = minion.selectPortfolioStocks(email, portfolio)
     return stocks
 
@@ -343,9 +343,9 @@ def selectPortfolioStocks():
 '''
 @app.route('/selectIndividualPortfolioStock', methods=['POST','GET'])
 def selectIndividualPortfolioStock():
-    ticker = request.form['ticker']
-    email = request.form['email']
-    portfolio = request.form['portfolio']
+    ticker = request.json['ticker']
+    email = request.json['email']
+    portfolio = request.json['portfolio']
     stock = minion.selectIndividualPortfolioStock(ticker, email, portfolio)
     return stock
 
@@ -370,10 +370,10 @@ def selectAllPurchasedStock():
 '''
 @app.route('/insertStockHistory', methods=['POST','GET'])
 def insertStockHistory():
-    ticker = request.form['ticker']
-    date = request.form['date']
-    price = request.form['price']
-    quantity = request.form['quantity']
+    ticker = request.json['ticker']
+    date = request.json['date']
+    price = request.json['price']
+    quantity = request.json['quantity']
     minion.insertStockHistory(ticker, date, price, quantity)
 
 '''
@@ -384,7 +384,7 @@ def insertStockHistory():
 '''
 @app.route('/removeStockHistory', methods=['POST','GET']) #there is a typo in the dao for this one 'hisotry'
 def removeStockHistory():
-    ticker = request.form['ticker']
+    ticker = request.json['ticker']
     minion.removeStockHistory(ticker)
 
 '''
@@ -395,7 +395,7 @@ def removeStockHistory():
 '''
 @app.route('/selectStockHistory', methods=['POST','GET'])
 def selectStockHistory():
-    ticker = request.form['ticker']
+    ticker = request.json['ticker']
     stock = minion.selectStockHistory(ticker)
     return stock
 
@@ -426,16 +426,16 @@ def selectAllStockHistories():
 '''
 @app.route('/insertStockWatch', methods=['POST','GET'])
 def insertStockWatch():
-    ticker = request.form['ticker']
-    date = request.form['date']
-    price = request.form['current_price']
-    quantity = request.form['quantity']
-    name = request.form['name']
-    open_price = request.form['open_price']
-    current_volume = request.form['current_volume']
-    market_cap = request.form['market_cap']
-    fifty_two_week_high = request.form['fifty_two_week_high']
-    fifty_two_week_low = request.form['fifty_two_week_low']
+    ticker = request.json['ticker']
+    date = request.json['date']
+    price = request.json['current_price']
+    quantity = request.json['quantity']
+    name = request.json['name']
+    open_price = request.json['open_price']
+    current_volume = request.json['current_volume']
+    market_cap = request.json['market_cap']
+    fifty_two_week_high = request.json['fifty_two_week_high']
+    fifty_two_week_low = request.json['fifty_two_week_low']
     #Updates all 3 as per DAO, will require API call for info
     minion.insertStockWatch(email, ticker)
     minion.insertStockHistory(ticker, date, price, quantity)
@@ -450,8 +450,8 @@ def insertStockWatch():
 '''
 @app.route('/removeStockWatch', methods=['POST','GET'])
 def removeStockWatch():
-    ticker = request.form['ticker']
-    email = request.form['email']
+    ticker = request.json['ticker']
+    email = request.json['email']
     minion.removeStockWatch(email, ticker)
 
 '''
@@ -462,7 +462,7 @@ def removeStockWatch():
 '''
 @app.route('/selectUserWatchlist', methods=['POST','GET'])
 def selectUserWatchlist():
-    email = request.form['email']
+    email = request.json['email']
     watchlist = minion.selectUserWatchlist(email)
     return watchlist
 
