@@ -18,28 +18,41 @@ def foobar():
 ############ Auth   API ############
 ############            ############
 
-def authenticate(email, password):
-    user = minion.selectUser(email)
-    if user['email'] == email and user['password'] == password:
-        return user
+# def authenticate(email, password):
+#     user = minion.selectUser(email)
+#     if user['email'] == email and user['password'] == password:
+#         return user
 
-def identity(userPayload):
-    user_id = userPayload['user_id']
-    return user_id
+# def identity(userPayload):
+#     user_id = userPayload['user_id']
+#     return user_id
 
-jwt = JWT(app, authenticate, identity)
+# jwt = JWT(app, authenticate, identity)
 
-#Send a post request with {'username': , 'password': }
-#Returns an 'access_token'
-@app.route('/protected')
-@jwt_required()
-def protected():
-    return '%s' % current_identity
+# #Send a post request with {'username': , 'password': }
+# #Returns an 'access_token'
+# @app.route('/protected')
+# @jwt_required()
+# def protected():
+#     return '%s' % current_identity
 
 
 ############            ############
 ############ Actual API ############
 ############            ############
+
+@app.route('/authenticate')
+def authenticate():
+    email = request.json['email']
+    password = request.json['password']
+    user = minion.selectUser(email)
+    if user['email'] == email and user['password'] == password:
+      resp = {'message':'Email and Password OK'}
+      return jsonify(resp)
+    else:
+      resp = {'error': 'Email and password do not match'}
+      return make_response(jsonify(resp), 401)
+
 
 
 @app.route('/user', methods=['POST','GET','PUT'])
@@ -64,7 +77,6 @@ def user():
     return 'failure'
 
 @app.route('/portfolios', methods=['POST','GET','PUT','DELETE'])
-@jwt_required()
 def portfolios():
     if request.method == 'GET':
         portfolios = minion.selectAllPortfolios()
