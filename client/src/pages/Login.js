@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import fetch from 'isomorphic-fetch'
 
 import {Button, Input} from '../components/FormComponents'
-import { setUserEmail, setUserPass } from '../redux/actions'
+import { setUserEmail} from '../redux/actions'
 import { getAuth } from '../redux/selectors'
 
 const url = 'https://cors-anywhere.herokuapp.com/http://agile-trader.herokuapp.com/'
@@ -14,8 +14,10 @@ const url = 'https://cors-anywhere.herokuapp.com/http://agile-trader.herokuapp.c
 export default function LogIn() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState(false)
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const sendData = () => {
     console.log('Sending request')
@@ -31,11 +33,19 @@ export default function LogIn() {
         password: password
       })
     }).then((response) => {
-      console.log(response)
+      console.log(response.status)
+      if (response.status === 200) {
+        // Redirect to portfolios, and store the user in the store
+        setError(false)
+        dispatch(setUserEmail(email))
+        history.push("/portfolios")
+      }
+      else {
+        setError(true)
+      }
     })
   }
 
-  const auth = useSelector(getAuth)
   return (
     <div css={css`
       display: flex;
@@ -46,9 +56,6 @@ export default function LogIn() {
       <h2>Log In</h2>
       <form onSubmit={(e) => {
         e.preventDefault()
-        
-        dispatch(setUserEmail(email))
-        dispatch(setUserPass(password))
 
         sendData()
       }}>
@@ -65,6 +72,7 @@ export default function LogIn() {
         />
         <Button type="submit">Enter</Button>
       </form>
+      {error && <p>Invalid email or password</p>}
       <NavLink to="/login" css={css`text-decoration: none; color: #2b7bbe;`}>Forgot your password?</NavLink>
       <NavLink to="/signup" css={css`text-decoration: none; color: #2b7bbe;`}>Sign Up</NavLink>
     </div>
