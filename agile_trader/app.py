@@ -49,6 +49,8 @@ def authentication():
     userDict = user[0]
     if userDict.get('email') == email and userDict.get('password') == password:
         return "Email and Password Ok"
+    else:
+        return "Bad Email Password"
 
 
 @app.route('/user', methods=['POST','GET','PUT'])
