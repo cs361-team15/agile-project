@@ -21,7 +21,7 @@ export default function LogIn() {
 
   const sendData = () => {
     console.log('Sending request')
-    fetch(url + 'authentication' ,{
+    fetch(url + 'authentication', {
       method: 'POST',
       mode: 'cors',
       headers: {

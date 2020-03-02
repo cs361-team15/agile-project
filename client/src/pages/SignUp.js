@@ -3,12 +3,21 @@ import { css, jsx } from '@emotion/core'
 import { useState } from 'react'
 
 import {Button, Input} from '../components/FormComponents'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
+
+
+const url = 'https://cors-anywhere.herokuapp.com/http://agile-trader.herokuapp.com/'
 
 export default function LogIn() {
   const [email, setEmail] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirm, setPasswordConfirm] = useState("")
+  const [perror, setPerror] = useState(false)
+  const [eerror, setEerror] = useState(false)
+
+  const history = useHistory()
 
   return (
     <div css={css`
@@ -20,8 +29,38 @@ export default function LogIn() {
       <h2>Sign Up</h2>
       <form onSubmit={(e) => {
         e.preventDefault()
-        // Make 
+        if (password != passwordConfirm) {
+          setPerror(true)
+        }
+        else {
+          fetch(url + 'insertUser', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: email,
+              password: password,
+              first_name: firstName,
+              last_name: lastName
+            })
+          }).then(()=>{
+            history.push("/login")
+          })
+        }
       }}>
+        <Input
+          value={firstName}
+          onChange={e => setFirstName(e.target.value)}
+          placeholder="First Name"
+        />
+        <Input
+          value={lastName}
+          onChange={e => setLastName(e.target.value)}
+          placeholder="Last Name"
+        />
         <Input
           value={email}
           onChange={e => setEmail(e.target.value)}
