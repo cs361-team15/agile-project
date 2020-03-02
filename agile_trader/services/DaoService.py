@@ -110,6 +110,16 @@ class DaoService:
         
         return self._DB_R(user_query, (email,))
 
+    def selectUserAuth(self, email):
+        '''
+        Summary:    Returns user of unique email attribute value.
+        Params:     [1] user email string.
+        Outputs:    [1] list of dictionary for user matching unique criteria.
+        '''
+        user_query = ("SELECT password FROM user "
+                        "WHERE email = %s ;")
+        
+        return self._DB_R(user_query, (email,))
 
     def selectAllUsers(self):
         '''
