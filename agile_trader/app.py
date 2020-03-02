@@ -43,11 +43,11 @@ def foobar():
 
 @app.route('/authentication', methods=['POST'])
 def authentication():
-  email = request.json['email']
-  password = request.json['password']
-  user = minion.selectUser(email)
-  userDict = user[0]
-  if userDict.get('email') == email and userDict.get('password') == password:
+    email = request.json['email']
+    password = request.json['password']
+    user = minion.selectUser(email)
+    userDict = user[0]
+    if userDict.get('email') == email and userDict.get('password') == password:
     return "Email and Password Ok"
 
 
