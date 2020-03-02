@@ -157,6 +157,7 @@ def insertPortfolio():
     email = request.json['email']
     portfolio = request.json['portfolio']
     minion.insertPortfolio(portfolio, email)
+    return "OK", 200
 
 '''
       Summary:    Remove portfolio of specific name from a user
