@@ -1,5 +1,5 @@
 # project/app.py
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from flask_jwt import JWT, jwt_required, current_identity
 from services.ApplicationService import ApplicationService
 from services.DaoService import DaoService
@@ -48,9 +48,9 @@ def authentication():
     user = minion.selectUserAuth(email)
     userDict = user[0]
     if userDict.get('password') == password:
-        return "Email and Password Ok"
+        return Response("Email and Password Ok", status=200)
     else:
-        return "Bad Email Password"
+        return Response("Bad Email Password", status=201)
 
 
 @app.route('/user', methods=['POST','GET','PUT'])

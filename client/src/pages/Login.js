@@ -19,7 +19,7 @@ export default function LogIn() {
 
   const sendData = () => {
     console.log('Sending request')
-    fetch(url + 'authenticate' ,{
+    fetch(url + 'authentication' ,{
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -27,11 +27,11 @@ export default function LogIn() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: email,
+        email: email,
         password: password
       })
     }).then((response) => {
-      console.log(response.status)
+      console.log(response)
     })
   }
 
