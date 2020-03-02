@@ -125,7 +125,7 @@ def removeUser():
 def selectUser():
     email = request.json['email']
     user = minion.selectUser(email)
-    return user
+    return jsonify(user)
 
 '''
       Summary:    Get a list of all users
@@ -135,7 +135,7 @@ def selectUser():
 @app.route('/selectAllUsers', methods=['POST','GET'])
 def selectAllUsers():
     userList = minion.selectAllUsers()
-    return userList
+    return jsonify(userList)
 
 ############		       #############
 ############ PORTFOLIO API #############
@@ -196,7 +196,7 @@ def selectPortfolio():
     email = request.json['email']
     portfolio = request.json['portfolio']
     onePortfolio = minion.selectPortfolio(portfolio, email)
-    return onePortfolio
+    return jsonify(onePortfolio)
 
 '''
       Summary:    Select all portfolios of a user
@@ -208,7 +208,7 @@ def selectPortfolio():
 def selectAllUserPortfolios():
     email = request.json['email']
     portfolios = minion.selectAllUserPortfolios(email)
-    return portfolios
+    return jsonify(portfolios)
 
 '''
       Summary:    Select all portfolios of all users
@@ -218,7 +218,7 @@ def selectAllUserPortfolios():
 @app.route('/selectAllPortfolios', methods=['POST','GET'])
 def selectAllPortfolios():
     onePortfolio = minion.selectAllPortfolios()
-    return onePortfolio
+    return jsonify(onePortfolio)
 
 ############		   #############
 ############ STOCK API #############
