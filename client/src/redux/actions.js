@@ -10,3 +10,9 @@ export function setUserEmail(email) {
 export function setUserPass(userPass) {
     return { type: SET_USER_PASS, userPass }
 }
+
+export const SET_PORTFOLIOS = 'SET_PORTFOLIOS'
+
+export function setPortfolios(portfolios) {
+    return { type: SET_PORTFOLIOS, portfolios}
+}

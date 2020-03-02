@@ -2,12 +2,19 @@ import { combineReducers } from 'redux'
 
 import {
     SET_JWT,
-    SET_USER_ID,
     SET_USER_EMAIL,
-    SET_USER_PASS
+    SET_USER_PASS,
+    // Portfolio actions
+    SET_PORTFOLIOS
 } from './actions'
 
-function authReducer(state = {}, action) {
+const initialState = {
+    jwt: "",
+    email: "",
+    userPass: ""
+}
+
+function authReducer(state = initialState, action) {
     switch (action.type) {
         case SET_JWT:
             return {
@@ -19,11 +26,6 @@ function authReducer(state = {}, action) {
                 ...state,
                 email: action.email
             }
-        case SET_USER_ID:
-            return {
-                ...state,
-                uID: action.uID
-            }
         case SET_USER_PASS:
             return {
                 ...state,
@@ -34,8 +36,10 @@ function authReducer(state = {}, action) {
     }
 }
 
-function portfolioReducer(state = [], action) {
+function portfolioReducer(state = [{}], action) {
     switch(action.type) {
+        case SET_PORTFOLIOS:
+            return action.portfolios
         default:
             return state
     }
@@ -43,7 +47,7 @@ function portfolioReducer(state = [], action) {
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    portfolio: portfolioReducer
+    portfolios: portfolioReducer
 })
 
 export default rootReducer

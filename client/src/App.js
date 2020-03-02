@@ -6,6 +6,7 @@ import {Button, Input} from './components/FormComponents'
 import LogIn from './pages/Login'
 import Landing from './pages/Landing'
 import SignUp from './pages/SignUp'
+import Portfolios from './pages/Portfolios'
 import { useState } from 'react'
 
 function TopNav() {
@@ -71,6 +72,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/portfolios">
+            <Portfolios />
           </Route>
           <Route exact path="/">
             <Landing />
