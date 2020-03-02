@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPortfolios } from '../redux/selectors'
 import { setPortfolios } from '../redux/actions'
+import { NavLink } from 'react-router-dom'
 
 import Portfolio from '../components/Portfolio'
 
@@ -39,6 +40,7 @@ export default function Portfolios() {
       }
     >
       <h2>Portfolios</h2>
+      <NavLink to="/portfolios/create" css={css`text-decoration: none; color: #2b7bbe;`}>Create new portfolio</NavLink>
       {portfolios.map(portfolio => <Portfolio key={portfolio.id} {...portfolio} />)}
     </div>
   )

@@ -171,6 +171,7 @@ def removePortfolio():
     email = request.json['email']
     portfolio = request.json['portfolio']
     minion.removePortfolio(portfolio, email)
+    return "OK", 200
 
 '''
       Summary:    Add to the balance of a portfolio
@@ -186,6 +187,7 @@ def addPortfolioBalance():
     email = request.json['email']
     portfolio = request.json['portfolio']
     minion.addPortfolioBalance(transfer, email, portfolio) #In the DB_CUD_ there was two trasnfer args?
+    return "OK", 200
 
 '''
       Summary:    Select a portfolio by name of a user

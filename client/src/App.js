@@ -7,6 +7,8 @@ import LogIn from './pages/Login'
 import Landing from './pages/Landing'
 import SignUp from './pages/SignUp'
 import Portfolios from './pages/Portfolios'
+import CreatePortfolio from './pages/CreatePortfolio'
+
 import { useState } from 'react'
 
 function TopNav() {
@@ -72,6 +74,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/portfolios/create">
+            <CreatePortfolio />
           </Route>
           <Route path="/portfolios">
             <Portfolios />
