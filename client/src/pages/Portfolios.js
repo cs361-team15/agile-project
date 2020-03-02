@@ -3,9 +3,9 @@ import { css, jsx } from '@emotion/core'
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPortfolios } from '../redux/selectors'
+import { getPortfolios, getAuth } from '../redux/selectors'
 import { setPortfolios } from '../redux/actions'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 
 import Portfolio from '../components/Portfolio'
 
@@ -13,18 +13,29 @@ const url = 'https://cors-anywhere.herokuapp.com/http://agile-trader.herokuapp.c
 
 export default function Portfolios() {
   const dispatch = useDispatch()
+  const auth = useSelector(getAuth)
+  const history = useHistory()
 
   useEffect(() => {
+    if (auth.email === "") {
+      history.push("/login")
+    }
     // Make the request in here
     fetch(url + 'selectAllUserPortfolios', {
-      method: 'GET',
+      method: 'POST',
       mode: 'cors',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({
+        email: auth.email
+      })
+    }).then((res) => {
+      return res.json()
+    }).then((res) => {
+      dispatch(setPortfolios(res))
     })
-    dispatch(setPortfolios([{name:'Port1', id: 0},{name:'Port2', id: 1},{name:'Port3', id: 2}]))
   }, [])
 
   const portfolios = useSelector(getPortfolios)
@@ -41,7 +52,7 @@ export default function Portfolios() {
     >
       <h2>Portfolios</h2>
       <NavLink to="/portfolios/create" css={css`text-decoration: none; color: #2b7bbe;`}>Create new portfolio</NavLink>
-      {portfolios.map(portfolio => <Portfolio key={portfolio.id} {...portfolio} />)}
+      {portfolios.map(portfolio => <Portfolio key={portfolio.name} {...portfolio} />)}
     </div>
   )
 }
