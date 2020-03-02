@@ -276,7 +276,7 @@ def removeStock():
 def selectStock():
     ticker = request.json['ticker']
     stock = minion.selectStock(ticker)
-    return stock
+    return jsonify(stock)
 
 '''
       Summary:    Returns all entities in the database table.
