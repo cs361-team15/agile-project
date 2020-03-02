@@ -208,7 +208,7 @@ def selectPortfolio():
 def selectAllUserPortfolios():
     email = request.json['email']
     portfolios = minion.selectAllUserPortfolios(email)
-    return portfolio
+    return portfolios
 
 '''
       Summary:    Select all portfolios of all users
